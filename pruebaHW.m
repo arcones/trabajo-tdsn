@@ -7,11 +7,8 @@ v=daq.getVendors;
 % Dispositivos disponibles
 d=daq.getDevices;
 
-% Se crea una sesión
+% Se crea una sesion
 s=daq.createSession('directsound');
 
-% Se añade un canal de salida
-sa=addAudioOutputChannel(s, 'Audio3', 1,'Audio');
-
-% Se añade un canal de entrada
+% Se agnade un canal de entrada
 ea=addAudioInputChannel(s, 'Audio1', 1,'Audio');
