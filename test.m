@@ -4,6 +4,6 @@
 
 clear;
 
-[s,Fs] = audioread('./segnales/piano.wav');
+[s,Fs] = audioread('piano.wav');
 medirSegnal(s,Fs,'piano.wav');
 soundsc(s,Fs);
