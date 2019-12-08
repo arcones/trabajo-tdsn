@@ -1,6 +1,5 @@
 % 
 % Trabajo Final
-% Vumetro
 % Marta Arcones y Miguel Gonzalez
 % 
 clear

@@ -1,26 +1,25 @@
-function [s,dBA] = medirSegnal(s,Fs)
+function medirSegnal(segnal, Fs, nombreSegnal)
 
-% Calculo la FFT
-X = abs(fft(s));
+if ~exist('nombreSegnal','var')
+  nombreSegnal = 'Segnal en Tiempo Real';
+end
 
-% Cuando la transformada da cero, pongo un valor muy pequegno para evitar logaritmos de cero
-X(find(X==0)) = 1e-17;
+% Paso bajo
+porcentajePasoBajo = hallarPorcentaje(pasoBajo(segnal, Fs));
 
-% Cojo las frecuencias que cumplen el teorema de Nyquist
-f = (Fs/length(X))*[0:length(X)-1];
-ind = find(f<Fs/2);
-f = f(ind);
-X = X(ind);
+% Paso alto
+porcentajePasoAlto = hallarPorcentaje(pasoAlto(segnal, Fs));
 
+% Comprobacion
+total = porcentajePasoAlto + porcentajePasoBajo;
+disp(['La suma de los porcentajes es ', num2str(total)]);
+condicionError = total < 98 || total > 102;
 
-% Filtrado
-A = filterA(f);
-X =  A'.*X;
+if condicionError == 1
+    error('La suma de los porcentajes es incoherente');
+end
 
-% Estimacion de los dBA de la segnal
-energiaTotal = sum(X.^2)/length(X);
-media = energiaTotal/((1/Fs)*length(x));
-dBA = 10*log10(media)+50; % 50 es un parámetro de calibración
-
-% Decibelios de la señal
-X = 20*log10(X);
+% Grafico de tarta
+pie([porcentajePasoBajo, porcentajePasoAlto]);
+legend('Paso Bajo', 'Paso Alto');
+title(strcat(['Distribucion de frecuencias de', ' ',nombreSegnal]));
