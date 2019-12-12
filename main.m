@@ -5,18 +5,26 @@
 clear
 
 % Datos
-Fs=8000; % Frecuencia de muestreo
-L=400; % Longitud de los bloques de la señal de entrada
+Fs = 44100; % Frecuencia de muestreo
+L = 400; % Longitud de los bloques de la segnal de entrada
 
-% Programación del canal de entrada analógica
-s=daq.createSession('directsound');               % Se crea una sesión
-ea=addAudioInputChannel(s, 'Audio1', 1,'Audio');  % Se añade un canal de entrada
-s.Rate = Fs; % Frecuencia de muestreo
-s.IsContinuous=true; % Operation continua
-s.NotifyWhenDataAvailableExceeds = L; % Se avisa cuando hay mas de L muestras en la FIFO de entrada
+% Grafica para mostrar las frecuencias
+grafica = barh([0 0 0]);
+yticklabels({'Frecuencias Bajas','Frecuencias Medias','Frecuencias Altas'})
+xlabel('Porcentaje de cada tipo de frecuencia en la segnal')
+
+session =daq.createSession('directsound');               
+addAudioInputChannel(session,'Audio1',1); 
+session.Rate = Fs;
+session.IsContinuous=true;
+session.NotifyWhenDataAvailableExceeds = L; % Se avisa cuando hay mas de L muestras en la FIFO de entrada
 
 % Listener
-lh = addlistener(s,'DataAvailable',@(src,event) medirSegnal(s,Fs));
+lh = addlistener(session,'DataAvailable',@(src,event) medirSegnal(session, event.Data, Fs, grafica));
 
-% Comienzo de la operación
-startBackground(s);  % Operación en Background
+% Comienzo de la operacion
+startBackground(session);  % Operacion en Background
+
+%% Para el proceso
+stop(session);
+
