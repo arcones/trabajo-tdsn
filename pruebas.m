@@ -8,7 +8,7 @@ clear;
 
 [s,Fs] = audioread('piano.wav');
 
-%% Creacion de las entidades necesarias
+% Creacion de las entidades necesarias
 
 % Grafica para mostrar las frecuencias
 grafica = crearGrafica();

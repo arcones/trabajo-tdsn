@@ -33,6 +33,5 @@ lh = addlistener(session,'DataAvailable',@(src,event) pintarGrafica(hallarPorcen
 startBackground(session);  % Operacion en Background
 
 %% Parar el proceso
-
 stop(session);
 
