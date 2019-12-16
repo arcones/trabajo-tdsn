@@ -6,24 +6,38 @@
 clc;
 clear;
 
-%% Grafica para mostrar las frecuencias
+[s,Fs] = audioread('piano.wav');
+
+%% Creacion de las entidades necesarias
+
+% Grafica para mostrar las frecuencias
 grafica = barh([0 0 0]);
 yticklabels({'Frecuencias Bajas','Frecuencias Medias','Frecuencias Altas'})
 xlabel('Porcentaje de cada tipo de frecuencia en la segnal')
 
-%% Prueba 1
-[s,Fs] = audioread('piano.wav');
-medirSegnal(1,s,Fs,grafica);
+% Parametros comunes a los filtros
+Orden = 10;
+Rizado = 1;
+Atenuacion = 500;
 
-%% Prueba 2
-[s,Fs] = audioread('dave.wav');
-medirSegnal(1,s,Fs,grafica);
+% Filtro paso alto
+WcAlto = 2*3000/Fs;
+[BAlto,AAlto] = ellip(Orden,Rizado,Atenuacion,WcAlto,'high');
 
-%% Prueba 3
-[s,Fs] = audioread('noimporta.wav');
-medirSegnal(1,s,Fs,grafica);
+% Filtro paso banda
+Fc1 = 1500*5;
+Fc2 = 1500*5;
+WnBanda = [Fc1 Fc2]/Fs; 
+[BBanda,ABanda] = ellip(Orden,Rizado,Atenuacion,WnBanda,'bandpass');
 
-%% Prueba 4
-[s,Fs] = audioread('jack.wav');
-medirSegnal(1,s,Fs,grafica);
+% Filtro paso bajo
+WcBajo = 2*3000/Fs;
+[BBajo,ABajo] = ellip(Orden,Rizado,Atenuacion,WcBajo,'low');
+
+%% Prueba
+porcentajePasoBajo = hallarPorcentaje(abs(s-filter(BBajo,ABajo,s)) <= 0.01);
+porcentajePasoBanda = hallarPorcentaje(abs(s-filter(BBanda,ABanda,s)) <= 0.01);
+porcentajePasoAlto = hallarPorcentaje(abs(s-filter(BAlto,AAlto,s)) <= 0.01);
+
+medirSegnal('',  porcentajePasoBajo , porcentajePasoBanda, porcentajePasoAlto, Fs, grafica);
 
