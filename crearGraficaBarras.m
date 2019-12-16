@@ -1,4 +1,4 @@
-function [grafica] = crearGrafica()
+function [grafica] = crearGraficaBarras()
 figure('Name','Grafico de barras')
 grafica = barh([0 0 0]);
 yticklabels({'Frecuencias Bajas','Frecuencias Medias','Frecuencias Altas'})
