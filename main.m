@@ -8,8 +8,8 @@
 clear
 
 % Datos
-Fs = 44100;
-L = 4410; % Quiero 10 actualizaciones de la grafica cada segundo
+Fs = 8000;
+L = 800; % Quiero 10 actualizaciones de la grafica cada segundo
 
 % Creacion filtros
 [BAlto,AAlto,BBanda,ABanda,BBajo,ABajo] = crearFiltros(Fs);
