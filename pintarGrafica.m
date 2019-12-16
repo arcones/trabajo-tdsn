@@ -1,4 +1,4 @@
-function pintarGrafica(session, porcentajePasoBajo, porcentajePasoBanda, porcentajePasoAlto, grafica)
+function pintarGrafica(porcentajePasoBajo, porcentajePasoBanda, porcentajePasoAlto, grafica)
 
 % Actualizacion de valores de la grafica
 porcentajes = [porcentajePasoBajo porcentajePasoBanda porcentajePasoAlto];

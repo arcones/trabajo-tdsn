@@ -39,5 +39,5 @@ porcentajePasoBajo = hallarPorcentaje(abs(s-filter(BBajo,ABajo,s)) <= 0.01);
 porcentajePasoBanda = hallarPorcentaje(abs(s-filter(BBanda,ABanda,s)) <= 0.01);
 porcentajePasoAlto = hallarPorcentaje(abs(s-filter(BAlto,AAlto,s)) <= 0.01);
 
-medirSegnal('',  porcentajePasoBajo , porcentajePasoBanda, porcentajePasoAlto, Fs, grafica);
+pintarGrafica(porcentajePasoBajo , porcentajePasoBanda, porcentajePasoAlto, grafica);
 

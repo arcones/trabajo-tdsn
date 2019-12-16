@@ -9,7 +9,7 @@ clear
 
 % Datos
 Fs = 44100;
-L = 4410;
+L = 4410; % Quiero 10 actualizaciones de la grafica cada segundo
 
 % Parametros comunes a los filtros
 Orden = 10;
@@ -42,10 +42,10 @@ session = daq.createSession('directsound');
 addAudioInputChannel(session,'Audio1',1); 
 session.Rate = Fs;
 session.IsContinuous = true;
-session.NotifyWhenDataAvailableExceeds = L; % Se avisa cuando hay mas de L muestras en la FIFO de entrada
+session.NotifyWhenDataAvailableExceeds = L;
 
 % Listener
-lh = addlistener(session,'DataAvailable',@(src,event) pintarGrafica(session, hallarPorcentaje(abs(event.Data-filter(BBajo,ABajo,event.Data)) <= 0.01), hallarPorcentaje(abs(event.Data-filter(BBanda,ABanda,event.Data)) <= 0.01), hallarPorcentaje(abs(event.Data-filter(BAlto,AAlto,event.Data)) <= 0.01), grafica));
+lh = addlistener(session,'DataAvailable',@(src,event) pintarGrafica(hallarPorcentaje(abs(event.Data-filter(BBajo,ABajo,event.Data)) <= 0.01), hallarPorcentaje(abs(event.Data-filter(BBanda,ABanda,event.Data)) <= 0.01), hallarPorcentaje(abs(event.Data-filter(BAlto,AAlto,event.Data)) <= 0.01), grafica));
 
 % Comienzo de la operacion
 startBackground(session);  % Operacion en Background
