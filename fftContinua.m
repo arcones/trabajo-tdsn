@@ -1,17 +1,14 @@
-function fftContinua(segnal, Fs, grafica)
+function fftContinua(segnal, segnalBajo, segnalBanda, segnalAlto, Fs, grafica, graficaBajo, graficaBanda, graficaAlto)
 
-siguentePotencia = 2 ^ nextpow2(length(segnal));
-plotScaleFactor = 4;
-plotRange = siguentePotencia / 2;
-plotRange = floor(plotRange / plotScaleFactor);
-rangoFrecuencias = (0:siguentePotencia-1) * (Fs / siguentePotencia);
-gfreq = rangoFrecuencias(1:plotRange);
+[gfreq, fftSegnal] = pintarFFT(segnal, Fs);
+[gfreq, fftBajo] = pintarFFT(segnalBajo, Fs);
+[gfreq, fftBanda] = pintarFFT(segnalBanda, Fs);
+[gfreq, fftAlto] = pintarFFT(segnalAlto, Fs);
 
-yDFT = fft(segnal, siguentePotencia);
-h = yDFT(1:plotRange);
-abs_h = abs(h);
-
-set(grafica, 'ydata', abs_h, 'xdata', gfreq);
+set(grafica, 'ydata', fftSegnal, 'xdata', gfreq);
+set(graficaBajo, 'ydata', fftBajo, 'xdata', gfreq);
+set(graficaBanda, 'ydata', fftBanda, 'xdata', gfreq);
+set(graficaAlto,  'ydata', fftAlto, 'xdata', gfreq);
 drawnow;
 
 end

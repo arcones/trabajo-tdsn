@@ -1,11 +1,6 @@
-function [porcentaje] = hallarPorcentaje(array)
+function [porcentaje] = hallarPorcentaje(segnal, segnalFiltrada, Fs)
 
-contador = 0;
+energiaSegnal = obw(segnal,Fs);
+energiaSegnalFiltrada = obw(segnalFiltrada,Fs);
 
-for n = 1 : length(array)
-   if array(n) == 1
-       contador =  contador + 1;
-   end
-end
-
-porcentaje = contador/length(array)*100;
+porcentaje = (energiaSegnalFiltrada/energiaSegnal)*100;
