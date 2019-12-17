@@ -3,9 +3,9 @@ function [BAlto,AAlto,BBanda,ABanda,BBajo,ABajo] = crearFiltros(Fs)
 % Frecuencias de la voz humana: entre 250Hz y 3000Hz
 
 % Parametros comunes a los filtros
-Orden = 8;
+Orden = 6;
 Rizado = 1;
-Atenuacion = 100;
+Atenuacion = 40;
 
 % Filtro paso bajo
 FcBajo = 750;
@@ -13,13 +13,13 @@ WcBajo = FcBajo/(Fs/2);
 [BBajo,ABajo] = ellip(Orden,Rizado,Atenuacion,WcBajo,'low');
 
 % Filtro paso banda
-FcBanda1 = 1250;
+FcBanda1 = 750;
 FcBanda2 = 1750;
 WnBanda = [FcBanda1 FcBanda2]/(Fs/2); 
-[BBanda,ABanda] = ellip(Orden*2,Rizado,Atenuacion,WnBanda,'bandpass');
+[BBanda,ABanda] = ellip(Orden,Rizado,Atenuacion,WnBanda,'bandpass');
 
 % Filtro paso alto
-FcAlto = 2500;
+FcAlto = 1750;
 WcAlto = FcAlto/(Fs/2);
 [BAlto,AAlto] = ellip(Orden,Rizado,Atenuacion,WcAlto,'high');
 
