@@ -1,14 +1,13 @@
-function fftContinua(segnal, segnalBajo, segnalBanda, segnalAlto, Fs, grafica, graficaBajo, graficaBanda, graficaAlto)
+function fftContinua(segnales, Fs, graficas)
 
-[gfreq, fftSegnal] = pintarFFT(segnal, Fs);
-[gfreq, fftBajo] = pintarFFT(segnalBajo, Fs);
-[gfreq, fftBanda] = pintarFFT(segnalBanda, Fs);
-[gfreq, fftAlto] = pintarFFT(segnalAlto, Fs);
+if length(segnales) == length(graficas)
+    error('Los arrays de segnales y graficas han de tener el mismo tamanyo');
+end
 
-set(grafica, 'ydata', fftSegnal, 'xdata', gfreq);
-set(graficaBajo, 'ydata', fftBajo, 'xdata', gfreq);
-set(graficaBanda, 'ydata', fftBanda, 'xdata', gfreq);
-set(graficaAlto,  'ydata', fftAlto, 'xdata', gfreq);
-drawnow;
+for i=1:length(graficas)
+    [frecuencia, fftSegnal] = pintarFFT(segnales(:,i), Fs);
+    set(graficas(i), 'ydata', fftSegnal, 'xdata', frecuencia);
+    drawnow;
+end
 
 end

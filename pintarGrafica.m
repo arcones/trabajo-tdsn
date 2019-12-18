@@ -4,3 +4,5 @@ function pintarGrafica(porcentajePasoBajo, porcentajePasoBanda, porcentajePasoAl
 porcentajes = [porcentajePasoBajo porcentajePasoBanda porcentajePasoAlto];
 set(grafica, 'ydata', porcentajes);
 drawnow;
+
+end

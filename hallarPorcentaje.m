@@ -1,6 +1,12 @@
-function [porcentaje] = hallarPorcentaje(segnal, segnalFiltrada, Fs)
+function [porcentaje] = hallarPorcentaje(segnal, segnalFiltrada)
 
-energiaSegnal = obw(segnal,Fs);
-energiaSegnalFiltrada = obw(segnalFiltrada,Fs);
+energiaSegnal = sum(segnal.^2);
+energiaSegnalFiltrada = sum(segnalFiltrada.^2);
 
 porcentaje = (energiaSegnalFiltrada/energiaSegnal)*100;
+
+if porcentaje > 100
+    error("El porcentaje del filtro no es coherente");
+end
+
+end
