@@ -3,7 +3,9 @@
 % Marta Arcones y Miguel Gonzalez
 % 
 
-%% Creacion de variables y filtros fuera de tiempo real
+%% Arranque del programa
+
+% Creacion de variables y filtros fuera de tiempo real
 
 clear, clc
 warning('off','all')
@@ -29,7 +31,8 @@ fftGraficaBanda = crearGraficaFFT('Paso Banda');
 subplot(2,2,4)
 fftGraficaAlto = crearGraficaFFT('Paso Alto');
 subplot
-%% Tiempo real
+
+% Tiempo real
 
 % Preparacion de la sesion
 session = daq.createSession('directsound');    
@@ -66,7 +69,7 @@ listener2 = addlistener(session, 'DataAvailable', @(src,event) fftContinua(event
 % Comienzo de la operacion
 startBackground(session);  % Operacion en Background
 
-%% Parar el proceso
+%% Parada del programa
 stop(session);
 close all;
 
