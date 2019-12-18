@@ -5,33 +5,33 @@
 
 %% Arranque del programa
 
-% Creacion de variables y filtros fuera de tiempo real
-
 clear, clc
-%warning('off','all')
 
 % Datos
-Fs = 8000;
-L = 800; % Quiero 10 actualizaciones de la grafica cada segundo
+Fs = 44100;
+L = 4100; % Quiero 10 actualizaciones de la grafica cada segundo
 
-% Creacion filtros
-figure(1)
+% Creacion y representacion de los filtros utilizados
+figure(1);
 [BAlto,AAlto,BBanda,ABanda,BBajo,ABajo] = crearFiltros(Fs);
 
-% Representacion
-figure(2)
+% Grafico de barras con los porcentajes de frecuencias
+figure(2);
 graficaBarras = crearGraficaBarras();
 
-figure(3)
-subplot(2,2,1)
+% FFT de la segnal y de las segnales filtradas
+figure(3);
+subplot(2,2,1);
 fftGrafica = crearGraficaFFT('Paso Todo');
-subplot(2,2,2)
+subplot(2,2,2);
 fftGraficaBajo = crearGraficaFFT('Paso Bajo');
-subplot(2,2,3)
+subplot(2,2,3);
 fftGraficaBanda = crearGraficaFFT('Paso Banda');
-subplot(2,2,4)
+subplot(2,2,4);
 fftGraficaAlto = crearGraficaFFT('Paso Alto');
-subplot
+subplot;
+
+graficasFFT = [fftGrafica, fftGraficaBajo, fftGraficaBanda, fftGraficaAlto];
 
 % Tiempo real
 
@@ -42,30 +42,22 @@ session.Rate = Fs;
 session.IsContinuous = true;
 session.NotifyWhenDataAvailableExceeds = L;
 
-% Listener 1: Grafica de porcentajes
-listener1 = addlistener(...
-    session, ...
-    'DataAvailable',...
-    @(src,event) ...
-    pintarGrafica(...
+% Listener 1: Grafico de barras con los porcentajes de frecuencias
+listener1 = addlistener(session, 'DataAvailable', @(src,event) pintarGrafica(...
         hallarPorcentaje(event.Data,filter(BBajo,ABajo,event.Data)), ...
         hallarPorcentaje(event.Data,filter(BBanda,ABanda,event.Data)), ...
         hallarPorcentaje(event.Data,filter(BAlto,AAlto,event.Data)), ...
         graficaBarras) ...
     );
 
-% Listener 2: FFT Segnal y filtros
-listener2 = addlistener(session, 'DataAvailable', @(src,event) fftContinua(event.Data, ...
-        filter(BBajo,ABajo,event.Data), ...
-        filter(BBanda,ABanda,event.Data), ...
-        filter(BAlto,AAlto,event.Data), ...
-        Fs, ...
-        fftGrafica, ...
-        fftGraficaBajo, ...
-        fftGraficaBanda, ...
-        fftGraficaAlto ...
+
+% Listener 2: FFT de la segnal y de las segnales filtradas
+listener2 = addlistener(session, 'DataAvailable', @(src,event) fftContinua(...
+        [event.Data, filter(BBajo,ABajo,event.Data), filter(BBanda,ABanda,event.Data), filter(BAlto,AAlto,event.Data)], ...
+        Fs,... 
+        graficasFFT...
         )...
-    );
+);
 
 % Comienzo de la operacion
 startBackground(session);  % Operacion en Background

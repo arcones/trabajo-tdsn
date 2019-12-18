@@ -5,4 +5,8 @@ energiaSegnalFiltrada = sum(segnalFiltrada.^2);
 
 porcentaje = (energiaSegnalFiltrada/energiaSegnal)*100;
 
+if porcentaje > 100
+    error("El porcentaje del filtro no es coherente");
+end
+
 end
