@@ -1,0 +1,3 @@
+- Actualizar pruebas.m con la versión final
+- Actualizar README.md
+- Arreglar hallarPorcentage.m con lo que contó Santos
