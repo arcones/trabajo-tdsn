@@ -1,3 +1,4 @@
 - Actualizar pruebas.m con la versión final
 - Actualizar README.md
 - Arreglar hallarPorcentage.m con lo que contó Santos
+- Bucle for para la función fftContinua (pasandole arrays en lugar de tantos parametros). Ídem en resto de functiones con muchos parametros.

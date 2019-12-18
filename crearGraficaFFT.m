@@ -7,3 +7,4 @@ title(tituloGrafica,'FontSize',12,'FontWeight','bold','Color','r')
 xlabel('Frecuencia','Color','k')
 ylabel('|Y(f)|')
 grid on
+end
