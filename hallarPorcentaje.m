@@ -1,6 +1,7 @@
 function [porcentaje] = hallarPorcentaje(segnal, segnalFiltrada, Fs)
 
-energiaSegnal = obw(segnal,Fs);
-energiaSegnalFiltrada = obw(segnalFiltrada,Fs);
+% energiaSegnal = obw(segnal,Fs);
+% energiaSegnalFiltrada = obw(segnalFiltrada,Fs);
 
-porcentaje = (energiaSegnalFiltrada/energiaSegnal)*100;
+
+porcentaje = (segnalFiltrada/segnal)*100;

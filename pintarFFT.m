@@ -3,7 +3,7 @@ function [gfreq, abs_h] = pintarFFT(segnal, Fs)
 siguentePotencia = 2 ^ nextpow2(length(segnal));
 plotScaleFactor = 4;
 plotRange = siguentePotencia / 2;
-plotRange = floor(plotRange / plotScaleFactor);
+plotRange = (floor(plotRange / plotScaleFactor))*3;
 rangoFrecuencias = (0:siguentePotencia-1) * (Fs / siguentePotencia);
 gfreq = rangoFrecuencias(1:plotRange);
 

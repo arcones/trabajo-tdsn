@@ -24,9 +24,7 @@ WcAlto = FcAlto/(Fs/2);
 [BAlto,AAlto] = ellip(Orden,Rizado,Atenuacion,WcAlto,'high');
 
 % Representacion de los filtros
-figure('Name','Filtros')
-xlabel('F(Hz)'), ylabel('dB');
-title('Filtros')
+
 grid on
 representarFiltro(BBajo, ABajo, Fs, 'Paso Bajo')
 hold on
@@ -34,7 +32,18 @@ representarFiltro(BBanda,ABanda, Fs, 'Paso Banda')
 hold on 
 representarFiltro(BAlto,AAlto, Fs, 'Paso Alto')
 legend ('Paso Bajo','Paso Banda','Paso Alto')
-axis([240 3000 -250 20])
+axis([0 3000 -120 20])
+
+
+title('Banco de Filtros','FontSize',12,'FontWeight','bold','Color','r')
+xlabel('Frecuencia','Color','k')
+ylabel('dB')
+
+grid on
+
+
+
+
 hold off
 
 

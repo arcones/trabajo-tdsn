@@ -6,21 +6,29 @@
 %% Creacion de variables y filtros fuera de tiempo real
 
 clear, clc
-
+warning('off','all')
 % Datos
 Fs = 8000;
 L = 800; % Quiero 10 actualizaciones de la grafica cada segundo
 
 % Creacion filtros
+figure(1)
 [BAlto,AAlto,BBanda,ABanda,BBajo,ABajo] = crearFiltros(Fs);
 
 % Representacion
+figure(2)
 graficaBarras = crearGraficaBarras();
-fftGrafica = crearGraficaFFT();
-fftGraficaBajo = crearGraficaFFT();
-fftGraficaBanda = crearGraficaFFT();
-fftGraficaAlto = crearGraficaFFT();
 
+figure(3)
+subplot(2,2,1)
+fftGrafica = crearGraficaFFT('Paso Todo');
+subplot(2,2,2)
+fftGraficaBajo = crearGraficaFFT('Paso Bajo');
+subplot(2,2,3)
+fftGraficaBanda = crearGraficaFFT('Paso Banda');
+subplot(2,2,4)
+fftGraficaAlto = crearGraficaFFT('Paso Alto');
+subplot
 %% Tiempo real
 
 % Preparacion de la sesion
@@ -61,3 +69,4 @@ startBackground(session);  % Operacion en Background
 %% Parar el proceso
 stop(session);
 close all;
+
