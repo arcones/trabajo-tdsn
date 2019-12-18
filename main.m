@@ -12,15 +12,15 @@ Fs = 44100;
 L = 4100; % Quiero 10 actualizaciones de la grafica cada segundo
 
 % Creacion y representacion de los filtros utilizados
-figure(1);
+figure('Name','Filtros utilizados','NumberTitle','off');
 [BAlto,AAlto,BBanda,ABanda,BBajo,ABajo] = crearFiltros(Fs);
 
 % Grafico de barras con los porcentajes de frecuencias
-figure(2);
+figure('Name','Grafico de barras','NumberTitle','off');
 graficaBarras = crearGraficaBarras();
 
 % FFT de la segnal y de las segnales filtradas
-figure(3);
+figure('Name','FFT de los filtros','NumberTitle','off');
 subplot(2,2,1);
 fftGrafica = crearGraficaFFT('Paso Todo');
 subplot(2,2,2);

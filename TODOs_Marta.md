@@ -1,4 +1,6 @@
-- Actualizar pruebas.m con la versión final
 - Actualizar README.md
-- Arreglar hallarPorcentage.m con lo que contó Santos
-- Bucle for para la función fftContinua (pasandole arrays en lugar de tantos parametros). Ídem en resto de functiones con muchos parametros.
+- Colapsar la creación de todas las gráficas en una función, con subplots dentro, etc
+- Poner más bonito el gráfico de barras (estilo)
+- A partir de la linea 26 de crearFiltros, refactor incluyendo la función representarFiltros
+- Actualiza pruebas.m
+- Usar pintarGrafica.m tb para la fft
