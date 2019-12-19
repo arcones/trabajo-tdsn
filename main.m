@@ -1,11 +1,12 @@
 % 
 % Trabajo Final
 % Marta Arcones y Miguel Gonzalez
+% Puesto B3
 % 
 
 %% Arranque del programa
-
-clear, clc
+close all;
+clear, clc;
 
 % Datos
 Fs = 44100;
