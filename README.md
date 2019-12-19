@@ -15,5 +15,5 @@ Si todo es correcto, durante la ejeccución, se mostraran varias representacione
 El programa crea y aplica tres filtros elípticos, paso bajo, paso banda y paso alto a las frecuencias de la señal de entrada.
 Además el programa calcula que porcentaje de la señal es paso bajo, banda y alto.
 Se muestra en tiempo real por pantalla:
- - La transformada de Fourier de las salidas de los filtros aplicados en tiempo real paso bajo, paso banda paso alto y paso todo.
+ - La transformada de Fourier de las salidas de los filtros aplicados en tiempo real paso bajo, paso banda, paso alto y paso todo.
  - Un gráfico de barras que muestra los porcentajes de señal que ha dejado pasar cada filtro. Además el programa comprueba en tiempo real que los porcentajes son coherentes, elevando una excepción si alguno de los porcentajes supera el 100%.
